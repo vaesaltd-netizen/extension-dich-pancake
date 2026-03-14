@@ -22,7 +22,7 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-echo [1/4] Downloading latest version from GitHub...
+echo [1/3] Downloading latest version from GitHub...
 curl -L -o "%ZIP_FILE%" "%DOWNLOAD_URL%" --progress-bar
 if %errorlevel% neq 0 (
     echo [ERROR] Download failed. Check your internet connection.
@@ -31,7 +31,7 @@ if %errorlevel% neq 0 (
 )
 
 echo.
-echo [2/4] Extracting files...
+echo [2/3] Extracting and updating...
 
 if exist "%EXTRACT_DIR%" rmdir /s /q "%EXTRACT_DIR%"
 
@@ -43,23 +43,11 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-echo.
-echo [3/4] Updating extension...
-
-if exist "%SCRIPT_DIR%ext-pancake" rmdir /s /q "%SCRIPT_DIR%ext-pancake"
-
-if exist "%EXTRACT_DIR%\ext-pancake" (
-    xcopy "%EXTRACT_DIR%\ext-pancake" "%SCRIPT_DIR%ext-pancake\" /E /I /Q /Y >nul
-) else (
-    echo [ERROR] ext-pancake folder not found in downloaded files.
-    rmdir /s /q "%EXTRACT_DIR%" 2>nul
-    del "%ZIP_FILE%" 2>nul
-    pause
-    exit /b 1
-)
+:: Copy all files from extracted folder to current directory (overwrite)
+xcopy "%EXTRACT_DIR%\*" "%SCRIPT_DIR%" /E /I /Q /Y >nul
 
 echo.
-echo [4/4] Cleaning up...
+echo [3/3] Cleaning up...
 rmdir /s /q "%EXTRACT_DIR%" 2>nul
 del "%ZIP_FILE%" 2>nul
 
@@ -71,7 +59,8 @@ echo.
 echo Next steps:
 echo   1. Open Chrome, go to chrome://extensions/
 echo   2. Enable "Developer mode"
-echo   3. Click "Load unpacked" and select: %SCRIPT_DIR%ext-pancake
+echo   3. Click "Load unpacked" and select this folder:
+echo      %SCRIPT_DIR%
 echo   (Or click the reload button if already loaded)
 echo.
 pause
