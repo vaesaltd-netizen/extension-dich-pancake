@@ -1,0 +1,142 @@
+/* AI Sidebar Panel Styles */
+/* Prefix: pit- (Pancake Inline Translator) */
+/* Design: Modern Trust Blue */
+
+/* CSS Variables for consistent theming */
+:root {
+  --pit-primary: #2563EB;
+  --pit-primary-hover: #1D4ED8;
+  --pit-primary-light: #DBEAFE;
+  --pit-secondary: #3B82F6;
+  --pit-accent: #F97316;
+  --pit-background: #F8FAFC;
+  --pit-surface: #FFFFFF;
+  --pit-text: #1E293B;
+  --pit-text-muted: #64748B;
+  --pit-border: #E2E8F0;
+  --pit-success: #10B981;
+  --pit-error: #EF4444;
+}
+
+/* AI Panel Container */
+.pit-ai-panel {
+  padding: 0;
+  background: var(--pit-surface);
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Textarea inputs - override Pancake styles */
+.pit-textarea {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 60px !important;
+  min-height: 60px !important;
+  padding: 10px 12px !important;
+  border: 1px solid var(--pit-border) !important;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  resize: none !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+  background: var(--pit-surface) !important;
+  color: var(--pit-text) !important;
+  margin: 0 !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.pit-textarea:focus {
+  outline: none !important;
+  border-color: var(--pit-primary) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+}
+
+.pit-textarea::placeholder {
+  color: var(--pit-text-muted) !important;
+}
+
+/* Loading State */
+.pit-ai-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  gap: 12px;
+  color: var(--pit-text-muted);
+}
+
+.pit-ai-spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--pit-border);
+  border-top-color: var(--pit-primary);
+  border-radius: 50%;
+  animation: pit-spin 0.8s linear infinite;
+}
+
+@keyframes pit-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Scrollbar */
+.pit-ai-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pit-ai-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pit-ai-panel::-webkit-scrollbar-thumb {
+  background: var(--pit-border);
+  border-radius: 3px;
+}
+
+.pit-ai-panel::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
+}
+
+/* Select dropdowns */
+.pit-ai-panel select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748B'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  padding-right: 32px !important;
+}
+
+/* Button hover animations */
+.pit-ai-btn {
+  transition: filter 0.2s ease, transform 0.1s ease;
+}
+
+.pit-ai-btn:hover {
+  filter: brightness(0.95);
+}
+
+.pit-ai-btn:active {
+  transform: scale(0.98);
+}
+
+/* Result content styles */
+.pit-result-content {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--pit-text);
+  white-space: pre-wrap;
+}
+
+/* Copy button animation */
+.pit-copy-foreign,
+.pit-copy-btn {
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.pit-copy-foreign:active,
+.pit-copy-btn:active {
+  transform: scale(0.95);
+}

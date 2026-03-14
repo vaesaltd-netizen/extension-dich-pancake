@@ -1,0 +1,61 @@
+{
+  "manifest_version": 3,
+  "name": "Pancake Inline Translator",
+  "version": "3.2.0",
+  "description": "Copyright belongs to VEASA Trading Co., Ltd",
+
+  "permissions": ["storage", "activeTab"],
+
+  "host_permissions": [
+    "https://pancake.vn/*",
+    "https://*.pancake.vn/*",
+    "https://pages.fm/*",
+    "https://*.pages.fm/*",
+    "https://api.openai.com/*"
+  ],
+
+  "web_accessible_resources": [{
+    "resources": ["lib/language-worker.js"],
+    "matches": [
+      "https://pancake.vn/*",
+      "https://*.pancake.vn/*",
+      "https://pages.fm/*",
+      "https://*.pages.fm/*"
+    ]
+  }],
+
+  "content_scripts": [{
+    "matches": [
+      "https://pancake.vn/*",
+      "https://*.pancake.vn/*",
+      "https://pages.fm/*",
+      "https://*.pages.fm/*"
+    ],
+    "js": [
+      "lib/license-service.js",
+      "lib/language-detector.js",
+      "lib/language-worker-client.js",
+      "lib/openai-translator.js",
+      "content-scripts/inline-translator.js",
+      "content-scripts/inline-toolbar.js"
+    ],
+    "css": ["styles/inline.css"],
+    "run_at": "document_idle"
+  }],
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icon-16.png",
+      "48": "assets/icon-48.png",
+      "128": "assets/icon-128.png"
+    },
+    "default_title": "Pancake Inline Translator Settings"
+  },
+
+  "icons": {
+    "16": "assets/icon-16.png",
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  }
+}
